@@ -1,0 +1,162 @@
+   
+/* canvas for stars + shooting star */
+#canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;  
+}
+
+/* ----------------------------------- home page ----------------------------------- */
+body {
+    color: white;
+    background: url("sky1.jpg");
+    background-size: cover;
+}
+  
+.home {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+  
+.home h1 {
+    font-family: "Caveat", cursive;
+    text-align: center;
+    color: white;
+    font-weight: 1000;
+    font-size: 80px;
+    line-height: 1.25;
+    text-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+}
+
+.home .text {
+    font-family: "Fuzzy Bubbles", cursive; 
+    font-size: 25px;
+    line-height: 1.75;
+    text-align: center;
+}
+  
+/* About Me and Dreams button */
+.home-buttons {
+    font-family: "Fraunces", cursive; 
+    display: flex;
+    justify-content: space-between;
+    width: 20%;
+    margin: 50px;  
+}
+  
+.btn {
+    position: relative;
+    display: inline-block;
+    padding: 15px 30px;
+    border-radius: 999px;
+    color: white;
+    text-decoration: none;
+    font-weight: 700;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    background: linear-gradient(135deg, #9d72fb 0%, #7DD3FC 50%, #E879F9 100%);
+}
+  
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow:
+        0 15px 30px rgba(112, 53, 220, 0.45),
+        inset 0 10px 20px rgba(255, 255, 255, 0.28);
+}
+  
+/* GitHub and LinkedIn button */
+.socials {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+  
+.socials a {
+    color: white;
+    font-size: 30px;
+}
+  
+.socials a:hover {
+    color: #9ec1ff; 
+    transform: translateY(-2px);
+}
+  
+/* back button */
+.back {
+    font-family: "Fraunces", cursive; 
+    display: inline-block;
+    margin: 20px;
+    color: white;
+    text-decoration: none;
+}
+  
+.back:hover {
+    text-decoration: underline;
+}
+
+/* --------------------------------- about me page --------------------------------- */
+
+.about {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 16px;
+    text-align: center;
+  }
+  
+  /* headings */
+  .about h1 {
+    font-family: "Caveat", cursive;
+    font-size: 64px;
+    line-height: 1.1;
+    margin: 0 0 6px;
+    text-shadow: 0 5px 15px rgba(0,0,0,.4);
+  }
+  
+  .about h2 {
+    font-family: "Fraunces", serif;
+    font-weight: 700;
+    font-size: 22px;
+    margin: 0 0 16px;
+    color: #fff;
+  }
+  
+  /* intro paragraph in a hand-written vibe */
+  .about p {
+    font-family: "Architects Daughter", cursive;
+    font-size: 20px;
+    line-height: 1.8;
+    margin: 0 auto 18px;
+    color: #fff;
+  }
+  
+  .about ul {
+    list-style: none;
+    margin: 14px auto 0;
+    gap: 12px;
+    text-align: left;
+    max-width: 700px;
+  }
+  
+  .about ul li {
+    position: relative;
+    padding-left: 25px;
+    line-height: 1.75;
+    font-size: 20px;
+  }
+  
+  .about ul li::before {
+    content: "✦";
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: #ffd7ff;
+    text-shadow: 0 0 5px rgba(254, 144, 254, 0.9);
+  }
