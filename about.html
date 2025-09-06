@@ -12,37 +12,36 @@
     <!-- Font Awesome for git and linkedin icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fuzzy+Bubbles:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Architects+Daughter&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
 </head>
 
 <body>
-    <!-- background -->
-    <div class="stars" aria-hidden="true"></div>
-    <div class="shooting" aria-hidden="true"></div>
+    <!-- canvas background for twinkling stars -->
+    <canvas id="twinkling-star"></canvas>
 
     <!-- top bar -->
     <a href="index.html" class="back">&larr; Home</a>
-    <header>
-        <h1>About Me</h1>
-    </header>
 
     <!-- content -->
     <main class="about">
         <section>
-            <h2>Hello, I’m Sabrina!</h2>
+            <h1>About Me!</h1>
 
             <p>
-                I’m a Computer Science student at UNSW who loves turning ideas into little projects and learning by doing.
+                Hello, I’m Sabrina! I’m a Computer Science student at UNSW who loves turning ideas into little projects and learning by doing.<br>
                 Recently I’ve been making simple games and web pages (like this one), and exploring the mix of tech and finance.
             </p>
 
-            <ul>
-                <li>Pronouns: she/her</li>
-                <li>Degree: Computer Science major + Finance minor at UNSW</li>
-                <li>Languages I’m learning: C, MIPS assembly, JavaScript/TypeScript, HTML, CSS</li>
-                <li>Hobbies: painting, playing billiards/pool, watching Netflix, and reading dark-genre books</li>
-                <li>Goal: become a software/fintech professional who turns ideas into real, impactful projects</li>
+            <ul class="list">
+                <li><span class="label">Pronouns:</span><span class="value">she/her</span></li>
+                <li><span class="label">Degree:</span><span class="value">Computer Science major + Finance minor at UNSW</span></li>
+                <li><span class="label">Languages:</span><span class="value">C, MIPS assembly, JavaScript/TypeScript, HTML, CSS<br>
+                                                                             English, Indonesia, Hokkien, Melayu, and Mandarin</span></li>
+                <li><span class="label">Hobbies:</span><span class="value">painting, playing billiards/pool, watching Netflix, and reading dark-genre books</span></li>
+                <li><span class="label">Goals:</span><span class="value">become a software/fintech professional who turns ideas into real, impactful projects</span></li>
               </ul>
             </ul>
         </section>
@@ -61,5 +60,24 @@
     <!-- stars script -->
     <script src="script.js"></script>
 </body>
+
+<!-- fade transition -->
+<script>
+    window.onload = function() {
+      unfade(document.body); 
+    };
+
+    document.querySelectorAll("a").forEach(link => {
+      if (link.hostname === window.location.hostname) {
+        link.addEventListener("click", function(e) {
+          e.preventDefault();
+          const href = this.getAttribute("href");
+          fade(document.body, function() {
+            window.location.href = href;
+          });
+        });
+      }
+    });
+  </script>
 
 </html>

@@ -12,26 +12,26 @@
     <!-- Font Awesome for git and linkedin icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fuzzy+Bubbles:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Architects+Daughter&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
 </head>
 
 <body>
-    <!-- background -->
-    <div class="stars" aria-hidden="true"></div>
-    <div class="shooting" aria-hidden="true"></div>
+    <!-- canvas background for twinkling stars -->
+    <canvas id="twinkling-star"></canvas>
 
     <!-- top bar -->
     <a href="index.html" class="back">&larr; Home</a>
-    <header>
-        <h1>Projects</h1>
-    </header>
 
     <!-- content -->
     <main class="dreams">
         <section>
+            <h1>⚞ Projects ⚟</h1>
+
             <h2>
-                Everything starts with a dream.
+                Everything starts with a dream.<br>
                 Here's my little roadmap, from today's steps to tomorrow's big dreams.
             </h2>
   
@@ -73,5 +73,24 @@
     <!-- stars script -->
     <script src="script.js"></script>
 </body>
+
+<!-- fade transition -->
+<script>
+    window.onload = function() {
+      unfade(document.body); 
+    };
+
+    document.querySelectorAll("a").forEach(link => {
+      if (link.hostname === window.location.hostname) {
+        link.addEventListener("click", function(e) {
+          e.preventDefault();
+          const href = this.getAttribute("href");
+          fade(document.body, function() {
+            window.location.href = href;
+          });
+        });
+      }
+    });
+  </script>
 
 </html>

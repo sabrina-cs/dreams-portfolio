@@ -14,16 +14,13 @@
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Fuzzy+Bubbles:wght@400;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Architects+Daughter&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
 </head>
 
 <body>
-    <!-- canvas background for stars -->
-    <canvas id="canvas"></canvas>
-
-    <!-- background -->
-    <div class="stars" aria-hidden="true"></div>
-    <div class="shooting" aria-hidden="true"></div>
+    <!-- canvas background for shooting stars -->
+    <section class="shooting-stars"></section>
 
     <!-- main content -->
     <main class="home">
@@ -54,5 +51,24 @@
     <!-- stars script -->
     <script src="script.js"></script>
 </body>
+
+<!-- fade transition -->
+<script>
+    window.onload = function() {
+      unfade(document.body); 
+    };
+
+    document.querySelectorAll("a").forEach(link => {
+      if (link.hostname === window.location.hostname) {
+        link.addEventListener("click", function(e) {
+          e.preventDefault();
+          const href = this.getAttribute("href");
+          fade(document.body, function() {
+            window.location.href = href;
+          });
+        });
+      }
+    });
+  </script>
 
 </html>
