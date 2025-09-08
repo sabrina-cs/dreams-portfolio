@@ -97,21 +97,21 @@
 // https://stackoverflow.com/questions/6121203/how-to-do-fade-in-and-fade-out-with-javascript-and-css
 
 function fade(element, callback) {
-  var op = 1; // initial opacity
+  var op = 1; 
   var timer = setInterval(function () {
-    if (op <= 0.1) {
+    if (op <= 0.01) {
       clearInterval(timer);
       element.style.display = 'none';
-      if (callback) callback(); // call callback after fade completes
+      if (callback) callback(); 
     }
     element.style.opacity = op;
     element.style.filter = 'alpha(opacity=' + op * 100 + ")";
-    op -= op * 0.1;
-  }, 50);
+    op -= op * 0.2;
+  }, 16);
 }
 
 function unfade(element) {
-  var op = 0.1; // initial opacity
+  var op = 0.0; 
   element.style.opacity = op;
   element.style.display = 'block';
   var timer = setInterval(function () {
@@ -120,6 +120,6 @@ function unfade(element) {
     }
     element.style.opacity = op;
     element.style.filter = 'alpha(opacity=' + op * 100 + ")";
-    op += op * 0.1;
-  }, 10);
+    op += op * 0.08 + 0.02;
+  }, 16);
 }

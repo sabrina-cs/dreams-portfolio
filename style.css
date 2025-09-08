@@ -33,7 +33,7 @@ html, body {
     transform: translateY(-50%);
     width: 300px;
     height: 1px;
-    background: linear-gradient(90deg, #fff, transparent);
+    background: linear-gradient(90deg, white, transparent);
 }
   
 @keyframes shootingStar {
@@ -62,13 +62,11 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh;
 }
   
 .home h1 {
     font-family: "Caveat", cursive;
     text-align: center;
-    color: white;
     font-weight: 1000;
     font-size: 80px;
     line-height: 1.25;
@@ -118,7 +116,7 @@ body {
     left: 20px;
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 5px;
 }
   
 .socials a {
@@ -138,7 +136,6 @@ body {
     font-size: 20px;
     display: inline-block;
     margin: 20px;
-    color: white;
     text-decoration: none;
 }
   
@@ -161,13 +158,11 @@ body {
     font-weight: 700;
     font-size: 30px;
     margin: 0 0 16px;
-    color: white;
   }
   
   .about p {
     font-family: "Caveat", cursive;
     font-size: 28px;
-    color: white;
   }
   
   .list {
@@ -226,14 +221,12 @@ body {
     font-weight: 700;
     font-size: 35px;
     margin: 0 0 16px;
-    color: white;
 }
 
 .dreams h2 {
     font-family: "Caveat", cursive;
     font-size: 27px;
     font-weight: 400;
-    color: white;
 }   
 
 .timeline {
@@ -278,4 +271,55 @@ body {
     font-size: 20px;
     line-height: 1.6;
     margin: 0;
+}
+
+/* --------------------------- display for smaller devices --------------------------- */
+/* phones */
+@media only screen and (max-width: 767px) {
+  .home h1 {
+    font-size: 48px;
+    line-height: 1.25;
+  }
+  .home .text {
+    font-size: 22px;
+    line-height: 1.45;
+    padding: 0 1rem;
+  }
+
+  .home-buttons {
+    width: min(90%, 340px);   
+    flex-direction: column; 
+    justify-content: center;  
+    align-items: center;
+    gap: 16px;
+    margin: 30px 0;
+  }
+
+  .socials {
+    gap: 5rem;
+  }
+
+  .timeline {
+    max-width: 92%;
+    padding-left: 0;
+    margin: 0 auto;
+  }
+
+  .timeline::before {
+    display: none;
+  }
+
+  .step {
+    padding-left: 40px;
+    margin-left: 0;
+  }
+
+  .step::before {
+    left: 0; 
+  }
+
+  .step p {
+    text-align: left;
+    margin: 0;
+  }
 }
