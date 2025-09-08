@@ -137,6 +137,7 @@ body {
     display: inline-block;
     margin: 20px;
     text-decoration: none;
+    color: white;
 }
   
 .back:hover {
@@ -273,53 +274,3 @@ body {
     margin: 0;
 }
 
-/* --------------------------- display for smaller devices --------------------------- */
-/* phones */
-@media only screen and (max-width: 767px) {
-  .home h1 {
-    font-size: 48px;
-    line-height: 1.25;
-  }
-  .home .text {
-    font-size: 22px;
-    line-height: 1.45;
-    padding: 0 1rem;
-  }
-
-  .home-buttons {
-    width: min(90%, 340px);   
-    flex-direction: column; 
-    justify-content: center;  
-    align-items: center;
-    gap: 16px;
-    margin: 30px 0;
-  }
-
-  .socials {
-    gap: 5rem;
-  }
-
-  .timeline {
-    max-width: 92%;
-    padding-left: 0;
-    margin: 0 auto;
-  }
-
-  .timeline::before {
-    display: none;
-  }
-
-  .step {
-    padding-left: 40px;
-    margin-left: 0;
-  }
-
-  .step::before {
-    left: 0; 
-  }
-
-  .step p {
-    text-align: left;
-    margin: 0;
-  }
-}
