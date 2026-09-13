@@ -1,55 +1,134 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-    <title>Home</title>
-    
-    <!-- CSS -->
-    <link rel="stylesheet" href="style.css" />
-    <!-- Font Awesome for git and linkedin icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Fuzzy+Bubbles:wght@400;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Architects+Daughter&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sabrina Gunawan</title>
+ 
+  <link rel="stylesheet" href="style.css" />
+  <!-- Font Awesome for GitHub / LinkedIn icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
-
 <body>
-    <!-- canvas background for shooting stars -->
-    <section class="shooting-stars"></section>
-
-    <!-- main content -->
-    <main class="home">
-        <h1>Home</h1>
-        <p class="text">
-            Greetings from my online space 🌙  <br>
-            a cozy spot where I share my projects, dreams, and things <br>
-            I'm learning along the way.
-        </p>
-
-        <!-- bottom centre aboutme and projects button-->
-        <div class="home-buttons">
-            <a class="btn" href="about.html">About Me</a>
-            <a class="btn" href="dreams.html">Dreams</a>
-        </div>
-    </main>
-
-    <!-- bottom left github and linkedin icons -->
-    <div class="socials">
-        <a href="https://github.com/sabrina-cs" target="_blank" aria-label="GitHub">
-            <i class="fa-brands fa-github"></i>
+ 
+  <!-- -------------- NAV -------------- -->
+  <header class="site-nav">
+    <a href="#home" class="logo">SG</a>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <!-- more sections (Experience, Projects, Volunteering, Skills,
+           Education, Contact) get added here in later stages -->
+    </nav>
+  </header>
+ 
+  <!-------------- HOME / HERO -------------- -->
+  <section id="home" class="hero">
+    <canvas id="star-canvas"></canvas>
+    <div class="mist mist-1"></div>
+    <div class="mist mist-2"></div>
+ 
+    <div class="hero-content">
+      <span class="badge"><i class="dot"></i>UNSW Sydney &middot; Sydney, Australia</span>
+ 
+      <h1 class="hero-name">
+        Sabrina<br />
+        <span class="script">Gunawan</span>
+      </h1>
+ 
+      <p class="hero-tagline">
+        Computer Science &times; Finance student building toward a career
+        in <strong>private wealth management</strong>.
+      </p>
+ 
+      <div class="hero-buttons">
+        <a href="#about" class="btn btn-primary">View Projects</a>
+        <a href="#about" class="btn btn-outline">Contact Me</a>
+      </div>
+ 
+      <div class="socials">
+        <a href="https://github.com/sabrina-cs" target="_blank" rel="noopener" aria-label="GitHub">
+          <i class="fa-brands fa-github"></i> github.com/sabrina-cs
         </a>
-        <a href="https://www.linkedin.com/in/sabrina-gunawan-15248b382/" target="_blank" aria-label="LinkedIn">
-            <i class="fa-brands fa-linkedin"></i>
+        <a href="https://www.linkedin.com/in/sabrina-gunawan1/" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <i class="fa-brands fa-linkedin"></i> LinkedIn
         </a>
+      </div>
     </div>
-
-    <!-- stars script -->
-    <script src="script.js"></script>
+ 
+    <svg class="hero-wave" viewBox="0 0 1440 90" preserveAspectRatio="none">
+      <path d="M0,40 C240,90 480,0 720,30 C960,60 1200,10 1440,40 L1440,100 L0,100 Z"></path>
+    </svg>
+  </section>
+ 
+  <!-- -------------- ABOUT -------------- -->
+  <section id="about" class="about">
+    <div class="section-heading">
+      <span class="section-number">01</span>
+      <h2>About</h2>
+    </div>
+ 
+    <div class="about-grid">
+      <div class="about-text">
+        <p>
+          Hi, I'm Sabrina — a Computer Science student at UNSW Sydney
+          minoring in Finance. I like turning ideas into real projects,
+          whether that's building a web app, analyzing a dataset, or
+          figuring out how a business actually runs.
+        </p>
+        <p>
+          I'm originally from Indonesia, and I'm working toward a career
+          in private wealth management, serving clients across the
+          Asia-Pacific region.
+        </p>
+ 
+        <div class="about-facts">
+          <div>
+            <span class="fact-label">Degree</span>
+            <span class="fact-value">Bachelor of Science, Computer Science (Finance minor), UNSW Sydney</span>
+          </div>
+          <div>
+            <span class="fact-label">Languages</span>
+            <span class="fact-value">English, Indonesian, Hokkien, Mandarin (conversational)</span>
+          </div>
+        </div>
+      </div>
+ 
+      <div class="hobby-carousel">
+        <span class="section-number small">A few things I enjoy outside of work</span>
+ 
+        <div class="carousel">
+          <button class="carousel-arrow prev" aria-label="Previous">
+            <i class="fa-solid fa-chevron-left"></i>
+          </button>
+ 
+          <div class="carousel-slide">
+            <div class="carousel-image" id="carousel-image">
+              <i class="fa-regular fa-image"></i>
+            </div>
+            <p class="carousel-caption" id="carousel-caption">Painting</p>
+          </div>
+ 
+          <button class="carousel-arrow next" aria-label="Next">
+            <i class="fa-solid fa-chevron-right"></i>
+          </button>
+        </div>
+ 
+        <div class="carousel-dots" id="carousel-dots"></div>
+      </div>
+    </div>
+  </section>
+ 
+  <!-- -------------- FUTURE SECTIONS -------------- -->
+  <!-- Experience, Projects, Volunteering, Skills, Education, Contact
+       get added here in later stages. -->
+ 
+  <script src="script.js"></script>
 </body>
-
 </html>
+ 
+
