@@ -1,125 +1,152 @@
-// Twinkling stars + Shooting stars
-// Twinkle adapted from https://codepen.io/Jenbo/pen/pgmZwB
-// Shooting stars adapted from https://codepen.io/tsotne-ts/pen/YzmxyjE
-
-/* -------------------------------- twinkling stars -------------------------------- */
-(function initTwinkle(){
-  const canvas = document.getElementById("twinkling-star");
-  if (!canvas) return; // only run on pages that have the canvas (about.html, dreams.html)
-
+// ---------------- Twinkling stars + shooting stars ----------------
+(function () {
+  const canvas = document.getElementById("star-canvas");
+  if (!canvas) return;
+ 
   const ctx = canvas.getContext("2d");
-
-  function sizeCanvas() {
-    canvas.width  = window.innerWidth;
-    canvas.height = window.innerHeight;
+  const hero = canvas.closest(".hero");
+  let width, height, stars, shootingStars;
+ 
+  const STAR_COLORS = ["#ffffff", "#ffffff", "#ffecd3", "#bfcfff"];
+ 
+  function resize() {
+    width = canvas.width = hero.offsetWidth;
+    height = canvas.height = hero.offsetHeight;
+    createStars();
   }
-  sizeCanvas();
-  window.addEventListener("resize", () => {
-    sizeCanvas();
-    buildStars();
+ 
+  function createStars() {
+    const count = Math.floor((width * height) / 9000);
+    stars = Array.from({ length: count }, () => ({
+      x: Math.random() * width,
+      y: Math.random() * height,
+      radius: Math.random() * 1.4 + 0.3,
+      baseAlpha: Math.random() * 0.6 + 0.3,
+      twinkleSpeed: Math.random() * 0.015 + 0.005,
+      phase: Math.random() * Math.PI * 2,
+      color: STAR_COLORS[(Math.random() * STAR_COLORS.length) | 0],
+    }));
+  }
+ 
+  function spawnShootingStar() {
+    shootingStars.push({
+      x: Math.random() * width * 0.7,
+      y: Math.random() * height * 0.4,
+      length: Math.random() * 120 + 80,
+      speed: Math.random() * 6 + 6,
+      angle: Math.PI / 5, // travels down-right
+      life: 1,
+    });
+  }
+ 
+  shootingStars = [];
+  let frame = 0;
+ 
+  function draw() {
+    ctx.clearRect(0, 0, width, height);
+ 
+    // twinkling stars, each 1 glows in its own colour
+    stars.forEach((s) => {
+      s.phase += s.twinkleSpeed;
+      ctx.globalAlpha = s.baseAlpha * (0.6 + 0.4 * Math.sin(s.phase));
+      ctx.shadowBlur = 8;
+      ctx.shadowColor = s.color;
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
+      ctx.fillStyle = s.color;
+      ctx.fill();
+    });
+    ctx.globalAlpha = 1;
+ 
+    // shooting stars
+    for (let i = shootingStars.length - 1; i >= 0; i--) {
+      const star = shootingStars[i];
+      const dx = Math.cos(star.angle) * star.speed;
+      const dy = Math.sin(star.angle) * star.speed;
+      star.x += dx;
+      star.y += dy;
+      star.life -= 0.02;
+ 
+      const tailX = star.x - Math.cos(star.angle) * star.length;
+      const tailY = star.y - Math.sin(star.angle) * star.length;
+ 
+      const gradient = ctx.createLinearGradient(star.x, star.y, tailX, tailY);
+      gradient.addColorStop(0, `rgba(255,255,255,${star.life})`);
+      gradient.addColorStop(1, "rgba(255,255,255,0)");
+ 
+      ctx.strokeStyle = gradient;
+      ctx.lineWidth = 2;
+      ctx.shadowBlur = 6;
+      ctx.shadowColor = "rgba(255, 236, 211, 0.8)"; // warm cream glow
+      ctx.beginPath();
+      ctx.moveTo(star.x, star.y);
+      ctx.lineTo(tailX, tailY);
+      ctx.stroke();
+ 
+      if (star.life <= 0 || star.x > width || star.y > height) {
+        shootingStars.splice(i, 1);
+      }
+    }
+ 
+    ctx.shadowBlur = 0;
+ 
+    // occasionally spawn a new shooting star (roughly every 8-14s)
+    frame++;
+    if (frame % Math.floor(Math.random() * 360 + 480) === 0) {
+      spawnShootingStar();
+    }
+ 
+    requestAnimationFrame(draw);
+  }
+ 
+  window.addEventListener("resize", resize);
+  resize();
+  draw();
+})();
+ 
+// ---------------- Hobby carousel ----------------
+(function () {
+  const slides = [
+    { label: "Painting", icon: "fa-regular fa-image" },
+    { label: "Pool / Billiards", icon: "fa-regular fa-image" },
+    { label: "Reading", icon: "fa-regular fa-image" },
+    { label: "Other", icon: "fa-regular fa-image" },
+  ];
+ 
+  const imageEl = document.getElementById("carousel-image");
+  const captionEl = document.getElementById("carousel-caption");
+  const dotsEl = document.getElementById("carousel-dots");
+  const prevBtn = document.querySelector(".carousel-arrow.prev");
+  const nextBtn = document.querySelector(".carousel-arrow.next");
+ 
+  if (!imageEl || !dotsEl) return;
+ 
+  let current = 0;
+ 
+  slides.forEach((_, i) => {
+    const dot = document.createElement("span");
+    if (i === 0) dot.classList.add("active");
+    dot.addEventListener("click", () => goTo(i));
+    dotsEl.appendChild(dot);
   });
-
-  function Star(x, y, r, color) {
-    this.x = x; this.y = y; this.r = r; this.color = color;
-    this.rChange = 0.006; // slower twinkle
+ 
+  function render() {
+    captionEl.textContent = slides[current].label;
+    [...dotsEl.children].forEach((d, i) =>
+      d.classList.toggle("active", i === current)
+    );
+    // To use a real photo instead of the placeholder icon, replace this
+    // block with: imageEl.style.backgroundImage = `url(images/hobby-${current}.jpg)`;
   }
-  Star.prototype.render = function () {
-    ctx.beginPath();
-    ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2, false);
-    ctx.shadowBlur = 8;
-    ctx.shadowColor = "white";
-    ctx.fillStyle = this.color;
-    ctx.fill();
-  };
-  Star.prototype.update = function () {
-    if (this.r > 2 || this.r < 0.8) this.rChange = -this.rChange;
-    this.r += this.rChange;
-  };
-
-  function randomColor() {
-    const arr = ["#ffffff", "#ffecd3", "#bfcfff"];
-    return arr[(Math.random() * arr.length) | 0];
+ 
+  function goTo(index) {
+    current = (index + slides.length) % slides.length;
+    render();
   }
-
-  let stars = [];
-  function buildStars() {
-    stars = [];
-    const COUNT = 120; // fewer stars
-    for (let i = 0; i < COUNT; i++) {
-      const x = Math.random() * canvas.width;
-      const y = Math.random() * canvas.height;
-      const r = Math.random() * 1.7 + 0.5;
-      stars.push(new Star(x, y, r, randomColor()));
-    }
-  }
-  buildStars();
-
-  function animate() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    for (let i = 0; i < stars.length; i++) {
-      stars[i].update();
-      stars[i].render();
-    }
-    requestAnimationFrame(animate);
-  }
-  animate();
+ 
+  prevBtn.addEventListener("click", () => goTo(current - 1));
+  nextBtn.addEventListener("click", () => goTo(current + 1));
+ 
+  render();
 })();
-
-
-/* ----------------------------------- shooting stars ----------------------------------- */
-(function initShooting(){
-  const layer = document.querySelector(".shooting-stars");
-  if (!layer) return; 
-
-  const numStars = 10;
-  const colors = ["#ffffff"]; 
-
-  for (let i = 0; i < numStars; i++) {
-    const star = document.createElement("span");
-
-    const topPosition = Math.random() * window.innerHeight;
-    const rightPosition = Math.random() * window.innerWidth;
-
-    const animationDelay = (-Math.random() * 6).toFixed(2) + "s";
-    const animationDuration = (Math.random() * 3 + 4).toFixed(2) + "s";
-
-    star.style.top = topPosition + "px";
-    star.style.right = rightPosition + "px";
-    star.style.background = colors[0];
-    star.style.animationDelay = animationDelay;
-    star.style.animationDuration = animationDuration;
-
-    layer.appendChild(star);
-  }
-})();
-
-// Fade transition adapted from 
-// https://stackoverflow.com/questions/6121203/how-to-do-fade-in-and-fade-out-with-javascript-and-css
-
-function fade(element, callback) {
-  var op = 1; 
-  var timer = setInterval(function () {
-    if (op <= 0.01) {
-      clearInterval(timer);
-      element.style.display = 'none';
-      if (callback) callback(); 
-    }
-    element.style.opacity = op;
-    element.style.filter = 'alpha(opacity=' + op * 100 + ")";
-    op -= op * 0.2;
-  }, 16);
-}
-
-function unfade(element) {
-  var op = 0.0; 
-  element.style.opacity = op;
-  element.style.display = 'block';
-  var timer = setInterval(function () {
-    if (op >= 1) {
-      clearInterval(timer);
-    }
-    element.style.opacity = op;
-    element.style.filter = 'alpha(opacity=' + op * 100 + ")";
-    op += op * 0.08 + 0.02;
-  }, 16);
-}
+ 
